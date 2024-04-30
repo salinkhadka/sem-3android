@@ -1,3 +1,48 @@
 <resources>
     <string name="app_name">index</string>
+    <string-array name="Country">
+        <item>Nepal</item>
+        <item>India</item>
+        <item>China</item>
+        <item>Canada</item>
+        <item>Pakistan</item>
+        <item>Samakhusi</item>
+        <item>Tokha</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+        <item>Dhulo ko desh</item>
+    </string-array>
 </resources>
