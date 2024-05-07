@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.index.adapter.imageAdapter
 
 class AppCompactActivity : AppCompatActivity() {
     lateinit var gridview:GridView;
@@ -18,6 +19,23 @@ class AppCompactActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_app_compact)
         gridview=findViewById(R.id.grid)
+        fillArrray()
+
+        var adapter=imageAdapter(nameList,imageList)
+        gridview.adapter=adapter;
+
+
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
+    }
+
+    private fun fillArrray() {
+        TODO("Not yet implemented")
         nameList.add("a")
         nameList.add("b")
         nameList.add("c")
@@ -29,13 +47,5 @@ class AppCompactActivity : AppCompatActivity() {
         imageList.add(R.drawable.a)
         imageList.add(R.drawable.b)
         imageList.add(R.drawable.c)
-
-
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
     }
 }
