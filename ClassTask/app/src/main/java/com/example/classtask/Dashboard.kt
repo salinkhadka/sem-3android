@@ -5,7 +5,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.classtask.adapter.adap
 
 class Dashboard : AppCompatActivity() {
     lateinit var recycle:RecyclerView;
@@ -26,6 +28,10 @@ class Dashboard : AppCompatActivity() {
         ListOfNumber.add(8);
         ListOfNumber.add(9);
         ListOfNumber.add(10);
+
+        var adapter = adap(ListOfNumber)
+        recycle.layoutManager = LinearLayoutManager(this)
+        recycle.adapter =adapter
 
 
 
