@@ -25,7 +25,14 @@ class imageAdapter(var nameList: ArrayList<String>, var imageList: ArrayList<Int
         var view: View = LayoutInflater.from(parent?.context)
             .inflate(R.layout.sample_grid_design_1, parent, false);
         var image: ImageView = view.findViewById(R.id.imageView2)
-        var text: TextView = view.findViewById(R.id.textView2)
+        var label: TextView = view.findViewById(R.id.textView2)
+
+        label.text=nameList[position]
+        image.setImageResource(imageList[position])
+
+
+        return view;
+
     }
 
 

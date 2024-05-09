@@ -1,6 +1,5 @@
 package com.example.index
 
-import android.content.Context
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView

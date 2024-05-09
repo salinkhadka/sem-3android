@@ -7,20 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".AppCompactActivity">
 
-    <androidx.gridlayout.widget.GridLayout
-        android:layout_width="300dp"
-        android:layout_height="631dp"
+    <GridView
+        android:id="@+id/grid"
+        android:layout_width="403dp"
+        android:numColumns="3"
+        android:layout_height="908dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <GridView
-            android:id="@+id/grid"
-            android:layout_width="273dp"
-            android:layout_height="match_parent"
-            app:layout_column="0"
-            app:layout_row="0"
-            android:numColumns="3"/>
-    </androidx.gridlayout.widget.GridLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

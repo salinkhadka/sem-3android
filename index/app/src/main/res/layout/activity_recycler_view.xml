@@ -7,4 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".RecyclerView">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/viewRec"
+        android:layout_width="251dp"
+        android:layout_height="282dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

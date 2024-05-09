@@ -35,7 +35,7 @@ class AppCompactActivity : AppCompatActivity() {
     }
 
     private fun fillArrray() {
-        TODO("Not yet implemented")
+//        TODO("Not yet implemented")
         nameList.add("a")
         nameList.add("b")
         nameList.add("c")
