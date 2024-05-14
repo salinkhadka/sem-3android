@@ -6,17 +6,28 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.splashandbuttonnavigation.databinding.ActivityDashboardBinding
 
 class DashboardActivity : AppCompatActivity() {
     lateinit var binding: ActivityDashboardBinding
 
 
-    replaceFragment()
+    private fun replaceFragment(fragment: Fragment) {
+       var fragmentManager:FragmentManager=supportFragmentManager
+        var fragmentTransaction:FragmentTransaction=fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frameLayout,fragment)
+        fragmentTransaction.commit()
+
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
+        replaceFragment()
         binding=ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
