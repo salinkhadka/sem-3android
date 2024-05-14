@@ -27,14 +27,22 @@ class DashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        replaceFragment()
+
         binding=ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        replaceFragment(HomeFragment())
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.home->
+                R.id.home->replaceFragment(HomeFragment())
+                R.id.search->replaceFragment(SecondFragment())
+                R.id.notification->replaceFragment(ThirdFragment())
+                R.id.profile->replaceFragment(FourthFragment())
+
+                else->{
+                    replaceFragment(ErrorFragment())
+                }
             }
+            true
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
