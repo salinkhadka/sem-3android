@@ -12,6 +12,6 @@
         android:text="This is home screen"
         android:gravity="center"
         android:textSize="35dp"
-        android:background="@android:color/darker_gray"/>
+        android:background="@android:color/black"/>
 
 </LinearLayout>
