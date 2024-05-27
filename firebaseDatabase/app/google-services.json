@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "420522965419",
+    "project_id": "e-commerce-cc7b6",
+    "storage_bucket": "e-commerce-cc7b6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420522965419:android:09e05ce82881d62b00faee",
+        "android_client_info": {
+          "package_name": "com.example.firebasedatabase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFBKW9xpGIF45duN4SnktSbW4zGoHgmS8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
