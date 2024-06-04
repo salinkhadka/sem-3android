@@ -6,17 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddProductActivity">
-
-    <ImageView
-        android:layout_width="150dp"
-        android:id="@+id/imageBrowse"
-        android:src="@drawable/baseline_add_a_photo_24"
-        android:layout_gravity="center"
-        android:layout_height="150dp"/>
+    tools:context=".UpdateProduct">
 
     <EditText
-        android:id="@+id/sendPName"
+        android:id="@+id/updateName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -25,7 +18,7 @@
         android:hint="PriceName" />
 
     <EditText
-        android:id="@+id/sendPPrice"
+        android:id="@+id/updatePrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -34,7 +27,7 @@
         android:hint="Price" />
 
     <EditText
-        android:id="@+id/sendDesc"
+        android:id="@+id/updateDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -46,5 +39,5 @@
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Update" />
 </LinearLayout>

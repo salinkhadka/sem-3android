@@ -1,18 +1,14 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    id("com.google.gms.google-services")
 }
 
 android {
-    buildFeatures{
-        viewBinding=true
-    }
-    namespace = "com.example.firebasedatabase"
+    namespace = "com.example.shopnepal"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.firebasedatabase"
+        applicationId = "com.example.shopnepal"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -46,11 +42,6 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.firebase.auth)
-    implementation(libs.firebase.database)
-    implementation("com.squareup.picasso:picasso:2.71828")
-    implementation(libs.firebase.storage.ktx)
-    implementation(libs.firebase.storage)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
