@@ -1,4 +1,4 @@
-package com.example.firebasedatabase
+package com.example.firebasedatabase.Ui.Activity
 
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -16,8 +16,14 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModel
+import com.example.firebasedatabase.R
+import com.example.firebasedatabase.Utils.ImageUtils
+import com.example.firebasedatabase.ViewModel.ProductViewModel
 import com.example.firebasedatabase.databinding.ActivityAddProductBinding
 import com.example.firebasedatabase.model.ProductModel
+import com.example.firebasedatabase.repository.ProductRepository
+import com.example.firebasedatabase.repository.ProductRepositoryImpl
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -26,13 +32,11 @@ import java.util.UUID
 
 class AddProductActivity : AppCompatActivity() {
     lateinit var addProductBinding: ActivityAddProductBinding
-    var firebaseDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
-    var ref: DatabaseReference = firebaseDatabase.reference.child("products")
     lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
     var imageUris: Uri? = null
+    lateinit var imageUtils: ImageUtils
+    lateinit var productViewModel: ProductViewModel
 
-    val firebaseStorage: FirebaseStorage = FirebaseStorage.getInstance()
-    val storageRef = firebaseStorage.reference
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -55,24 +59,20 @@ class AddProductActivity : AppCompatActivity() {
         addProductBinding = ActivityAddProductBinding.inflate(layoutInflater)
         setContentView(addProductBinding.root)
 
-        registerActivityForResult()
+        imageUtils = ImageUtils(this)
+        imageUtils.registerActivity { url ->
+            url.let {
+                imageUris = url
+                Picasso.get().load(url).into(addProductBinding.imageBrowse)
+            }
+
+
+        }
+        var repo = ProductRepositoryImpl()
+        productViewModel = ProductViewModel(repo)
         addProductBinding.imageBrowse.setOnClickListener {
 
-            Log.d("Hello","hello")
-
-            val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                android.Manifest.permission.READ_MEDIA_IMAGES
-            } else {
-                android.Manifest.permission.READ_EXTERNAL_STORAGE
-            }
-            if (ContextCompat.checkSelfPermission(this, permissions) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, arrayOf(permissions), 1)
-            } else {
-                val intent = Intent()
-                intent.type = "image/*"
-                intent.action = Intent.ACTION_GET_CONTENT
-                activityResultLauncher.launch(intent)
-            }
+            imageUtils.launchGallery(this)
         }
 
         addProductBinding.button.setOnClickListener {
@@ -90,56 +90,36 @@ class AddProductActivity : AppCompatActivity() {
         }
     }
 
-    private fun addProducts(url: String) {
+    private fun addProducts(url: String, imageName: String) {
         val name: String = addProductBinding.sendPName.text.toString()
         val price: Int = addProductBinding.sendPPrice.text.toString().toInt()
         val desc: String = addProductBinding.sendDesc.text.toString()
-        val id = ref.push().key.toString()
-        val data = ProductModel(id, name, price, desc, url)
 
-        ref.child(id).setValue(data).addOnCompleteListener {
-            if (it.isSuccessful) {
-                Toast.makeText(applicationContext, "Data added", Toast.LENGTH_LONG).show()
+        var data = ProductModel("", name, price, desc, url)
+        productViewModel.addProduct(data) { sucess, message ->
+            if (sucess) {
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show()
                 finish()
             } else {
-                Toast.makeText(applicationContext, it.exception?.message, Toast.LENGTH_LONG).show()
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show()
             }
         }
+
     }
 
-    private fun registerActivityForResult() {
-        activityResultLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult(),
-            ActivityResultCallback { result ->
-                val resultCode = result.resultCode
-                val imageData = result.data
-                if (resultCode == RESULT_OK && imageData != null) {
-                    imageUris = imageData.data
-                    imageUris?.let {
-                        Picasso.get().load(it).into(addProductBinding.imageBrowse)
-                    }
-                }
-            })
-    }
 
     private fun uploadPhoto() {
         val imageName = UUID.randomUUID().toString()
-        val imageRef = storageRef.child("products").child(imageName)
-
-        imageUris?.let { uri ->
-            imageRef.putFile(uri).addOnSuccessListener{
-
-                imageRef.downloadUrl.addOnSuccessListener {down->
-                    var imageUrl = down.toString()
-                    addProducts(imageUrl)
+        imageUris?.let {
+            productViewModel.uploadImage(imageName,it) { sucess, imageUrl ->
+                if (sucess) {
+                    addProducts(imageUrl.toString(),imageName.toString())
                 }
-
-            }.addOnFailureListener {
-
             }
-
-
         }
 
+
     }
+
 }
+

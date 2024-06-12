@@ -1,4 +1,4 @@
-package com.example.firebasedatabase
+package com.example.firebasedatabase.Ui.Activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.firebasedatabase.R
 import com.example.firebasedatabase.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email,password).addOnCompleteListener{
                 if(it.isSuccessful){
                     Toast.makeText(applicationContext,"Login sucess",Toast.LENGTH_LONG).show()
-                    var intent=Intent(this@MainActivity,DashboardActivity::class.java)
+                    var intent=Intent(this@MainActivity, DashboardActivity::class.java)
                     startActivity(intent)
                 }
                 else{
@@ -56,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
 
         MainActivity.forgetPW.setOnClickListener {
-            var intent=Intent(this@MainActivity,ResetPassword::class.java)
+            var intent=Intent(this@MainActivity, ResetPassword::class.java)
             startActivity(intent)
         }
 

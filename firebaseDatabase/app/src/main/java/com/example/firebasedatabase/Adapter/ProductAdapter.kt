@@ -2,17 +2,17 @@ package com.example.firebasedatabase.Adapter
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firebasedatabase.R
-import com.example.firebasedatabase.UpdateProduct
+import com.example.firebasedatabase.Ui.Activity.UpdateProduct
 import com.example.firebasedatabase.model.ProductModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -67,6 +67,17 @@ class ProductAdapter(var context: Context, var data: ArrayList<ProductModel>) :
             context.startActivity(intent)
 
         }
+    }
+    fun getProductID(position: Int) : String{
+        return data[position].id
+    }  fun getImageName(position: Int) : String{
+        return data[position].imageName
+    }
+    fun updateData(products:List<ProductModel>){
+        data.clear()
+        Log.d("called from adapter",products[0].name)
+        data.addAll(products)
+        notifyDataSetChanged()
     }
 
 }
