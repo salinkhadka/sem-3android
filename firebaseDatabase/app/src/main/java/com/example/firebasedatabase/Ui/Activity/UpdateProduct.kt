@@ -65,19 +65,11 @@ class UpdateProduct : AppCompatActivity() {
         var repo = ProductRepositoryImpl()
         productViewModel = ProductViewModel(repo)
 
-        imageUtils=ImageUtils(this)
+        imageUtils = ImageUtils(this)
         imageUtils.registerActivity {
-            imageUris=it
+            imageUris = it
             Picasso.get().load(it).into(upbinding.imageUpdate)
         }
-
-
-
-
-
-
-
-
 
 
         var product: ProductModel? = intent.getParcelableExtra("product")
@@ -88,7 +80,16 @@ class UpdateProduct : AppCompatActivity() {
         upbinding.updateDesc.setText(product?.description)
         Picasso.get().load(product?.url).into(upbinding.imageUpdate)
         upbinding.button.setOnClickListener {
-            uploadPhoto()
+            if (imageUris != null) {
+
+                uploadPhoto()
+
+            } else {
+                updateProducts(product?.url.toString())
+
+            }
+
+            finish()
 
         }
         upbinding.imageUpdate.setOnClickListener {
@@ -107,9 +108,8 @@ class UpdateProduct : AppCompatActivity() {
 
     private fun uploadPhoto() {
         imageUris?.let {
-            productViewModel.uploadImage(imageName, it) {
-                sucess ,imageUrl->
-                if (sucess){
+            productViewModel.uploadImage(imageName, it) { sucess, imageUrl ->
+                if (sucess) {
                     updateProducts(imageUrl.toString())
                 }
             }
@@ -118,7 +118,6 @@ class UpdateProduct : AppCompatActivity() {
 
 
     }
-
 
 
     fun updateProducts(url: String) {
@@ -132,14 +131,13 @@ class UpdateProduct : AppCompatActivity() {
         data["description"] = updatedDesc
         data["url"] = url
 
-        productViewModel.UpdateProduct(id,data){
-            sucess,message->
-                if (sucess){
-                    Toast.makeText(applicationContext,message,Toast.LENGTH_LONG).show()
-                }
-            else{
-                    Toast.makeText(applicationContext,message,Toast.LENGTH_LONG).show()
-                }
+        productViewModel.UpdateProduct(id, data) { sucess, message ->
+            if (sucess) {
+                Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+                finish()
+            } else {
+                Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+            }
 
         }
     }

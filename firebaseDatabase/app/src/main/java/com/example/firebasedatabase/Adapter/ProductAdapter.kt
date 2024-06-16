@@ -75,7 +75,6 @@ class ProductAdapter(var context: Context, var data: ArrayList<ProductModel>) :
     }
     fun updateData(products:List<ProductModel>){
         data.clear()
-        Log.d("called from adapter",products[0].name)
         data.addAll(products)
         notifyDataSetChanged()
     }

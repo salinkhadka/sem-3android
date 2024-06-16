@@ -44,6 +44,13 @@ class ProductViewModel(val repository: ProductRepository) : ViewModel() {
         repository.updateProduct(id, data, callback)
     }
 
+    fun deleteData(id:String,callback: (Boolean, String?) -> Unit){
+         repository.deleteData(id,callback)
+    }
+    fun deleteImage(imageName:String,callback: (Boolean, String?) -> Unit){
+        repository.deleteData(imageName,callback)
+    }
+
 
 
 

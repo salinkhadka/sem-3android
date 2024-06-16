@@ -19,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModel
 import com.example.firebasedatabase.R
 import com.example.firebasedatabase.Utils.ImageUtils
+import com.example.firebasedatabase.Utils.LoadingUtils
 import com.example.firebasedatabase.ViewModel.ProductViewModel
 import com.example.firebasedatabase.databinding.ActivityAddProductBinding
 import com.example.firebasedatabase.model.ProductModel
@@ -32,7 +33,10 @@ import java.util.UUID
 
 class AddProductActivity : AppCompatActivity() {
     lateinit var addProductBinding: ActivityAddProductBinding
+    lateinit var loadingUtils: LoadingUtils
     lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
+
+
     var imageUris: Uri? = null
     lateinit var imageUtils: ImageUtils
     lateinit var productViewModel: ProductViewModel
@@ -58,6 +62,8 @@ class AddProductActivity : AppCompatActivity() {
         enableEdgeToEdge()
         addProductBinding = ActivityAddProductBinding.inflate(layoutInflater)
         setContentView(addProductBinding.root)
+
+        loadingUtils=LoadingUtils(this)
 
         imageUtils = ImageUtils(this)
         imageUtils.registerActivity { url ->
@@ -95,13 +101,15 @@ class AddProductActivity : AppCompatActivity() {
         val price: Int = addProductBinding.sendPPrice.text.toString().toInt()
         val desc: String = addProductBinding.sendDesc.text.toString()
 
-        var data = ProductModel("", name, price, desc, url)
+        var data = ProductModel("", name, price, desc, url,imageName)
         productViewModel.addProduct(data) { sucess, message ->
             if (sucess) {
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show()
                 finish()
+                loadingUtils.dismiss()
             } else {
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                loadingUtils.dismiss()
             }
         }
 
@@ -109,6 +117,7 @@ class AddProductActivity : AppCompatActivity() {
 
 
     private fun uploadPhoto() {
+        loadingUtils.showLoading()
         val imageName = UUID.randomUUID().toString()
         imageUris?.let {
             productViewModel.uploadImage(imageName,it) { sucess, imageUrl ->
